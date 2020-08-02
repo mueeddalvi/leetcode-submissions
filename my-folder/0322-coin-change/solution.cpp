@@ -12,10 +12,7 @@ public:
             if(coins[0]<amount&&amount%coins[0]!=0)
                 return -1;
         }
-            
-        
-   
-        
+                    
         int n=coins.size();
         
         int dp[n+1][amount+1];
