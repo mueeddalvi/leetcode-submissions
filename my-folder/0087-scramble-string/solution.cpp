@@ -23,9 +23,9 @@ public:
         
         for(int i=1;i<=n1-1;i++)
         {
-            bool t1=isScramble(s1.substr(0,i),s2.substr(n1-i,i))&&                                          isScramble(s1.substr(i,n1-i),s2.substr(0,n1-i));
+            bool t1=isScramble(s1.substr(0,i),s2.substr(n2-i,i))&&                                          isScramble(s1.substr(i,n1-i),s2.substr(0,n2-i));
             
-            bool t2=isScramble(s1.substr(0,i),s2.substr(0,i))&&                                             isScramble(s1.substr(i,n1-i),s2.substr(i,n1-i));
+            bool t2=isScramble(s1.substr(0,i),s2.substr(0,i))&&                                             isScramble(s1.substr(i,n1-i),s2.substr(i,n2-i));
             if(t1||t2)
             {
                 flag=true;
