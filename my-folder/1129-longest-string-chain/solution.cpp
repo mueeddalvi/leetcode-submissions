@@ -5,7 +5,7 @@ public:
         return s1.length()<s2.length();
     }
     int longestStrChain(vector<string>& words) {
-       sort(words.begin(),words.end(),comp);
+        sort(words.begin(),words.end(),comp);
         map<string,int>dp;
         int res=0;
         for(string w:words)
