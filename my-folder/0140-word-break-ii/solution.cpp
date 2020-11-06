@@ -1,5 +1,5 @@
 class Solution {
-    map<string,vector<string>> dp;
+    unordered_map<string,vector<string>> dp;
 public:
     vector<string> wordBreak(string s, vector<string>& wordDict) {
         vector<string> res;
