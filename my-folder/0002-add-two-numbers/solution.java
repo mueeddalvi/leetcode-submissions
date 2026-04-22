@@ -3,54 +3,78 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
 class Solution {
+    List<Integer> res=new ArrayList<>();
+    int carry=0;
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        
-        ListNode l3 = new ListNode(0);
-        ListNode p= l1;
-        ListNode q=l2;
-        ListNode r=l3;
-        int carry=0;
-        
-        if(l1==null)
-        {
-            return l2;
+        while(l1!=null && l2!=null){
+            int input=l1.val+l2.val+carry;
+            if(input>9){
+                carry=1;
+            }
+            else{
+                carry=0;
+            }
+            res.add(input%10);
+            System.out.print(l1.val+" + "+l2.val+"\n");
+            l1=l1.next;
+            l2=l2.next;
         }
-        
-         if(l2==null)
-        {
-            return l1;
+        System.out.println();
+        while(l1!=null){
+            int input=l1.val;
+            if(carry>0){
+                input+=carry;
+            }
+            if(input>9){
+                carry=1;
+            }
+            else{
+                carry=0;
+            }
+            res.add(input%10);
+            l1=l1.next;
         }
-        
-        while(p!=null||q!=null)
-        {
-                        
-           int s1=(p!=null) ? p.val:0;
-            int s2=(q!=null) ? q.val:0;
-            System.out.println(s1+"  "+s2);
-           int sum=s1+s2+carry;
-            carry=sum/10;
-             System.out.println(sum);
-           r.next=new ListNode(sum%10);
-           r=r.next;
-            
-            if(p!=null)
-                p=p.next;
-            if(q!=null)
-                q=q.next;
-           
+        while(l2!=null){
+            int input=l2.val;
+            if(carry>0){
+                input+=carry;
+            }
+            if(input>9){
+                carry=1;
+            }
+            else{
+                carry=0;
+            }
+            l2=l2.next;
+            res.add(input%10);
         }
-        
-        if(carry>0)
-        {
-            r.next=new ListNode(carry);
+        if(carry==1){
+            res.add(1);
         }
-        
-        return l3.next;
-        
-        
+        //708 ==> 807
+        ListNode temp=new ListNode();
+        ListNode start=new ListNode();
+        start=temp;
+        for(int i=0;i<res.size();i++){
+            System.out.print(res.get(i)+" ");
+            temp.val=res.get(i);
+            if(i!=res.size()-1){
+                temp.next=new ListNode();
+                temp=temp.next;
+            }
+        }
+        return start;
     }
 }
+
+/*
+[9,9,9,9,9,9,9]
+      [9,9,9,9]
+           ,9,8  
+ */
