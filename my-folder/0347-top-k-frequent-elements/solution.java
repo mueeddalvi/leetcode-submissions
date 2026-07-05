@@ -1,38 +1,28 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         int res[] = new int[k];
 
-        for (int num : nums) {
-            map.putIfAbsent(num, 0);
-            map.put(num, map.get(num) + 1);
+        int length = nums.length;
+
+        Map<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
+
+        for (int n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
         }
 
-        int maxKey = Integer.MIN_VALUE;
-        int maxValue = Integer.MIN_VALUE;
-        int temp = k;
-        int i=0;
-        while (temp > 0) {
-            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                if (entry.getValue() > maxValue) {
-                    maxKey = entry.getKey();
-                    maxValue = entry.getValue();
-                }
-            }
-            
-            System.out.println(map);
-            System.out.println(maxKey);
-            System.out.println(maxValue);
-            System.out.println("------------------");
-            map.remove(maxKey);
-            res[i]=maxKey;
+        Queue<int[]> q = new PriorityQueue<>(k, (a, b) -> b[0] - a[0]);
+
+        for (Map.Entry<Integer, Integer> it : map.entrySet()) {
+            q.offer(new int[] { it.getValue(), it.getKey() });
+        }
+
+        int i = 0;
+        while (!q.isEmpty() && i < k) {
+            res[i] = q.poll()[1];
             i++;
-            temp--;
-            maxKey = Integer.MIN_VALUE;
-            maxValue = Integer.MIN_VALUE;
         }
 
         return res;
+
     }
 }
